@@ -1,57 +1,79 @@
-const mongoose = require("mongoose")
-const Task = mongoose.model("Tasks");
+const Task = require('../models/todoModel');
 
 /**Get all tasks */
-exports.getTasks = (req, res) => {
-    Task.find({}, (error, task) => {
-        if (error) {
-            res.send(error)
-        }
-        res.json(task);
-    });
+exports.getTasks = async function (req, res) {
+    try {
+        await Task.find({}, (error, task) => {
+            if (error) {
+                res.send(error)
+            }
+            res.json(task);
+        });
+    } catch(e) {
+        return res.status(400).json({status: 400, message: e.message})
+    }
+    
 };
 
 /**Create a task */
-exports.createTask = (req, res) {
+exports.createTask = async function(req, res){
+  try {
     const newTask = new Task(req.body);
-    newTask.save((error, task) => {
+    await newTask.save((error, task) => {
         if (error) {
             res.send(error)
         };
         res.json(task)
     })
+  } catch (e) {
+    return res.status(400).json({status: 400, message: e.message})
+  }
 }
 
 /**Get a task by id */
-exports.getTask = (req, res) => {
-    Task.findById(req.params.id, req.body, {new: true}, 
-        (error, task) => {
-            if (error) {
-                res.send(error);
-            };
-            res.json(task)
-        }
-    )
+exports.getTask = async function(req, res) {
+    try {
+        await Task.findById(req.params.taskId, function (error, task) {
+                if (error) {
+                    res.send(error);
+                };
+                res.json(task)
+            }
+        )
+    } catch (e) {
+        return res.status(400).json({status: 400, message: e.message})
+    }
 }
 
 /**Update a task */
-exports.updateTask = (req, res) => {
-    Task.findOneAndUpdate(req.params.id, req.body, {new: true},
-        (error, task) => {
+exports.updateTask = async function(req, res) {
+   try {
+    await Task.findOneAndUpdate({_id: req.params.taskId}, {"$set": req.body}, {new: true},
+        function (error, task) {
             if (error){
                 res.send(error)
             };
+            console.log("task", task, req.body)
             res.send(task)
         }
     )
+   } catch (e) {
+       return res.status(400).json({status: 400, message: e.message})
+   }
 }
 
 /**Delete a task */
-exports.deleteTask = (req, res) => {
-    Task.findByIdAndDelete({_id: req.params.id}, (error, task) => {
+exports.deleteTask = async function(req, res) {
+  try {
+    await Task.findByIdAndDelete({_id: req.params.delete}, (error, task) => {
+        console.log("req.params.taskId", req.params, req.params.delete)
         if (error) {
             res.send(error);
-        };
-        res.json({message: 'Task deleted!'})
+        } else {
+            res.json({message: 'Task deleted!'})
+        }
     })
+  } catch(error) {
+    return res.status(400).json({status: 400, message: e.message})
+  }
 }
