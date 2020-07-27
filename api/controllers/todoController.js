@@ -65,8 +65,7 @@ exports.updateTask = async function(req, res) {
 /**Delete a task */
 exports.deleteTask = async function(req, res) {
   try {
-    await Task.findByIdAndDelete({_id: req.params.delete}, (error, task) => {
-        console.log("req.params.taskId", req.params, req.params.delete)
+    await Task.findByIdAndDelete({_id: req.params.taskId}, (error, task) => {
         if (error) {
             res.send(error);
         } else {

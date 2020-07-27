@@ -6,6 +6,6 @@
     app.post('/tasks', todoList.createTask);
     app.get('/tasks/:taskId', todoList.getTask)
     app.put('/tasks/:taskId', todoList.updateTask)
-    app.delete('/tasks/:delete', todoList.deleteTask)
+    app.delete('/tasks/:taskId', todoList.deleteTask)
 
  }
