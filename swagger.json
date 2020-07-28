@@ -3,8 +3,9 @@
     "info": {
       "version": "1.0.0",
       "title": "Todo List",
+      "description": "This is a sample Todo server. You can use the api to Create, Read, Update and Delete tasks from database. In the future filters will be adeed.",
       "license": {
-        "name": ""
+        "name": "Created by Ionela Cristea"
       }
     },
     "host": "localhost:5000",
@@ -62,6 +63,14 @@
           "operationId": "createTask",
           "tags": [
             "Task"
+          ],
+          "parameters": [
+            {
+              "name": "title",
+              "in": "body",
+              "description": "Task object that needs to be added to the database.",
+              "required": true
+            }
           ],
           "responses": {
             "201": {
