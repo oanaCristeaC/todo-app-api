@@ -6,6 +6,8 @@ require('dotenv').config();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 
 //const urlMongo = 'mongodb://localhost/todoApp'
@@ -20,7 +22,9 @@ db.once('open', function() {
 
 //handle incoming requests
 app.use(bodyParser.urlencoded({ extended: true}))
-app.use(bodyParser.json()) 
+app.use(bodyParser.json())
+
+app.use('/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
     console.log("Server running on port", port)
