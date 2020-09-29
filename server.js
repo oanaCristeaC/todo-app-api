@@ -1,19 +1,17 @@
-
-//https://expressjs.com/en/4x/api.html#router
 const express = require ("express");
 const app = express();
-require('dotenv').config();
-const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
-//const urlMongo = 'mongodb://localhost/todoApp'
+
 const uri = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD)
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true })
-//mongoose.connect('mongodb://localhost/todos');
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -24,20 +22,25 @@ db.once('open', function() {
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 
+
 app.use('/v1', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.listen(port, () => {
     console.log("Server running on port", port)
 })
 
+/** Redirect to the api interface */
 app.get("/", (req, res, next) => {
-    res.json({test: "some random text"})
+    return res.redirect('/v1');
 })
+
 
 const routes = require('./api/routes/todoRoutes')
 routes(app)
 
-//handle unset rotes
+/** Handle unset routes */
 app.use((req, res) => {
-    res.status(404).send({url: req.originalUrl + ' not found'})
+    res.status(404).redirect('/v1') //.send({url: req.originalUrl + ' not found'})
 });
+
