@@ -1,4 +1,6 @@
 
+ /** This handle the routes to the api. */
+ 
  module.exports = (app) => {
     const todoList = require('../controllers/todoController');
 

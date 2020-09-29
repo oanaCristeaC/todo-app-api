@@ -1,3 +1,5 @@
+/** This is a task model. */
+
 const mongoose = require("mongoose")
 const todoSchema = new mongoose.Schema({ 
     title: {

@@ -1,3 +1,5 @@
+![todo-logo](./assets/todo.ico)
+## Todo App API
 A simple API written in Node.js to be used for a TODO front-end application.
 
 ### Usage
@@ -33,8 +35,7 @@ DB='mongodb+srv://<yourUsernameHere>:<PASSWORD>@cluster0-jlqrz.mongodb.net/todos
  
 Your ``` DB ``` connection is shown in [Part 5.](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/) of the MongoDB documentation. <br>
 
-![connection](https://docs.atlas.mongodb.com/_images/gswa-driver-cso-example.png)
-
+<img src="https://docs.atlas.mongodb.com/_images/gswa-driver-cso-example.png"  width="400"><br>
 
 
 ### Installation and Run 
