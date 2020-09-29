@@ -1,28 +1,53 @@
-A simple node API to be used for a TODO frond application.
+A simple API written in Node.js to be used for a TODO front-end application.
 
 ### Usage
 
-It is created to be used by anyone who wants to get started building a JavaScript applications or to learn on making a HTTP requests without worrying about the backend.
+It is created to be used by anyone who wants to get started building a JavaScript application, or to learn how to make HTTP requests without worrying about the back-end.
 
 ### Documentation
 <!--TODO: add link to the swagger doc-->
 
-[Here](https://github.com/oanaCristeaC) you can find details on how to make request to the API. 
+[Here](https://github.com/oanaCristeaC) you can find details on how to make requests to the API. 
 
 ### Requirement
 
-No pre-requirements are need it or installation to use this API. However, if you can download the git repository.
+No pre-requirements or installations are needed to use this API. <br>
 
-### Download
+#### However, if you wish to play around with the code
 
-You are free to download the git repository and play around with it. 
+You can do that following three steps: <br>
+1. Download the git repository.<br>
+
+2. Create an account with Cloud MongoDB Atlas and the database by following [the six steps found in the documentation](https://docs.atlas.mongodb.com/getting-started/)<br>
+
+3. Create an environment ``` .env  ``` file with port no and connection to the database on your project root directory. <br>
+
+```
+// Example .env
+PORT=5000
+
+PASSWORD='yourPassHere'
+DB='mongodb+srv://<yourUsernameHere>:<PASSWORD>@cluster0-jlqrz.mongodb.net/todos?retryWrites=true&w=majority
+
+```
+ 
+Your ``` DB ``` connection is shown in [Part 5.](https://docs.atlas.mongodb.com/tutorial/connect-to-your-cluster/) of the MongoDB documentation. <br>
+
+![connection](https://docs.atlas.mongodb.com/_images/gswa-driver-cso-example.png)
+
+
 
 ### Installation and Run 
 
-Run ```npm install``` to install the dependencies. <br>
-Run ```npm run serve``` to start the API.
+Run the following commands to install the dependencies and start the API.
 
-### Licence
+```
+npm install
+
+npm run serve
+``` 
+
+### License
 
 v1.0 &copy; [ionela cristea](https://github.com/oanaCristeaC)
 
